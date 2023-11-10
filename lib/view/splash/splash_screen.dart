@@ -17,15 +17,36 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   final userPreferences = UserPreferences();
+
+  late final AnimationController _lottieCtrl = AnimationController(
+      vsync: this, duration: const Duration(milliseconds: 700));
+
+
+
+  late final Animation<Offset> lottiePosition = Tween<Offset>(
+    begin: const Offset(10, 0),
+    end: const Offset(0, 0),
+  ).animate(
+    CurvedAnimation(parent: _lottieCtrl, curve: Curves.easeOutQuint),
+  );
+
+  late final Animation<Offset> textPosition = Tween<Offset>(
+    begin: const Offset(0, 10),
+    end: const Offset(0, 0),
+  ).animate(
+    CurvedAnimation(parent: _lottieCtrl, curve: Curves.easeOutQuint),
+  );
 
   @override
   void initState() {
     super.initState();
     userPreferences.getUserInfo();
+    _lottieCtrl.forward();
     navigation();
   }
+
   void navigation() {
     Duration duration = const Duration(seconds: 3);
 
@@ -35,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (UserPreferences.loggedIn == true) {
           // If the user is logged in, navigate to the dashboard screen.
           log(UserPreferences.userId.toString());
-          context.go(RoutesName.dashboardScreen);
+          context.go(RoutesName.homeScreen);
         } else {
           // If the user is not logged in, navigate to the login screen.
           context.go(RoutesName.loginScreen);
@@ -43,7 +64,6 @@ class _SplashScreenState extends State<SplashScreen> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +75,19 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Lottie.asset(
-                    AnimationAssets.splashAnimation,
-                    height: 170.h
+                SlideTransition(
+                  position:lottiePosition,
+                  child: Lottie.asset(AnimationAssets.splashAnimation, height: 170.h),
                 ),
-                Text(
-                  StringManager.myApp,
-                  style: TextStyle(
-                    fontSize: 55.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "DancingScript",
+                SlideTransition(
+                  position: textPosition,
+                  child: Text(
+                    StringManager.myApp,
+                    style: TextStyle(
+                      fontSize: 55.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "DancingScript",
+                    ),
                   ),
                 )
               ],

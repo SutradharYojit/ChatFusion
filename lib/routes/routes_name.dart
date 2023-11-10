@@ -4,6 +4,5 @@ class RoutesName{
   static const String loginScreen="/LoginScreen";
   static const String signupName="/SignUPName";
   static const String signupScreen="SignUPScreen";
-  static const String dashboardScreen="/Dashboard";
   static const String homeScreen="/HomeScreen";
 }

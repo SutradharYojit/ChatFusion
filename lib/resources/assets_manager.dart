@@ -7,7 +7,8 @@ class AnimationAssets {
   static const String splashAnimation = "$ANIMATION_PATH/splash_screen.json";
 }
 
-class ImageAssets {
+class IconAssets {
+  static const String appIcon = "$ICONS_PATH/chatfusion.png";
 
 }
 

@@ -55,7 +55,7 @@ class PrimaryTextFilled extends StatelessWidget {
 
 OutlineInputBorder buildOutlineInputBorder() {
   return OutlineInputBorder(
-    borderSide:   const BorderSide(color: Color(0xff88FF0C)),
+    borderSide:   const BorderSide(color: Color(0xff9370DB)),
     borderRadius: BorderRadius.circular(15),
   );
 }

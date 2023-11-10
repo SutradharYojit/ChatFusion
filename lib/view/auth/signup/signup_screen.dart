@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../model/model.dart';
 import '../../../resources/resources.dart';
 import '../../../routes/routes_name.dart';
 import '../../../services/api_constants.dart';
 import '../../../services/services.dart';
+import '../../../services/status_code.dart';
 import '../../../widget/widget.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,6 +25,8 @@ void requiredAllFilled(BuildContext context) {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _userController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final bar = WarningBar();
@@ -54,6 +56,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Image.asset(
+                        IconAssets.appIcon,
+                        height: 100.h,
+                      ),
+                    ),
                     Text(
                       StringManager.appTitle,
                       style: TextStyle(
@@ -70,6 +79,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15.r),
+                      child: PrimaryTextFilled(
+                        controller: _userController,
+                        hintText: StringManager.userHintTxt,
+                        labelText: StringManager.userLabelTxt,
+                        prefixIcon: const Icon(
+                          Icons.text_format,
+                          color: ColorManager.gradientPurpleColor,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+
                     Padding(
                       padding: EdgeInsets.only(top: 15.r),
                       child: PrimaryTextFilled(
@@ -105,27 +128,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           requiredAllFilled(context);
                         } else {
                           loading(context);
+                          await ApiServices().postApi(
+                            api: "${APIConstants.baseUrl}register/signUp",
+                            body: {
+                              ApiRequestBody.apiUserName: _userController.text.trim(),
+                              ApiRequestBody.apiEmail: _emailController.text.trim(),
+                              ApiRequestBody.apiPassword: _passController.text.trim(),
+                            },
+                          ).then(
+                                (value) {
+                              if(value.statusCode==ServerStatusCodes.forBid){
+                                Navigator.pop(context);// pop loading screen
+                                // toast snackBar message of existing User
+                                WarningBar.snackMessage(context,
+                                    message: StringManager.userExistTxt, color: ColorManager.redColor);
+                              }
+                              else{
+                                // store user token , and userId , logged in bool value
+                                userPreferences.saveLoginUserInfo(
+                                  value.data["token"],
+                                  value.data["success"],
+                                  value.data["userId"],
+                                );
+                                Navigator.pop(context);// pop loading screen
 
-                          // await ApiServices().postApi(
-                          //   api: "${APIConstants.baseUrl}createUser/signUp",
-                          //   data: {
-                          //     "email": _emailController.text.trim(),
-                          //     "password": _passController.text.trim(),
-                          //   },
-                          // ).then(
-                          //   (value) {
-                          //     log("Success");
-                          //     signUp.add(SignUpModel.fromJson(value));
-                          //     log(value.toString());
-                          //     userPreferences.saveLoginUserInfo(
-                          //       signUp.first.data!.email!,
-                          //       signUp.first.success!,
-                          //     );
-                          //     Navigator.pop(context);
-                          //     context.go(RoutesName.homeScreen);
-                          //     log(signUp.length.toString());
-                          //   },
-                          // );
+                                // Navigate to dashboard screen
+                                context.go(RoutesName.homeScreen);
+                              }
+                            },
+                          );
                         }
                       },
                     ),

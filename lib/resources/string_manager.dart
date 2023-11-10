@@ -13,6 +13,8 @@ class StringManager {
   static const passLabelTxt = "Password";
   static const requiredWarningTxt = "Enter all Filled";
   static const noAccountTxt = "Don't have an account?";
+  static const invalidCredentialsTxt = "Invalid Credentials";
+
 
   //SignUp Screen
   static const signUpText = "SignUp";
@@ -20,6 +22,7 @@ class StringManager {
   static const userLabelTxt = "User name";
   static const signupTitle = "Create your account to start sharing your thoughts with the world!";
   static const haveAccountTxt = "Already have an account?";
+  static const userExistTxt = "An account with this email already exists.";
 
   // Dashboard Screen
   static const portfolioScreen = "Portfolio";
@@ -29,13 +32,25 @@ class StringManager {
 }
 // Firebase Service String Manager, the string defines the key(which store the data/value) of the database and defines the firebase collection String
 
-// Api Service String Manager and key also
-class ApiServiceManager {
-  static const blogAdd = "Blog add Successfully";
-  static const blogUpdate = "Blog update Successfully";
-  static const apiTitleKey = "title";
-  static const apiDescriptionKey = "description";
-  static const apiAuthorKey = "authorId";
-  static const apiImageUrlKey = "imageUrl";
+// Api Service String Manager
+class ApiRequestBody {
+  static const apiEmail = "email";
+  static const apiPassword = "password";
+  static const apiTitle = "title";
+  static const apiDescription = "description";
+  static const apiTechnologies = "technologies";
+  static const apiCategories = "categories";
+  static const apiTags = "tags";
+  static const apiBlogImageUrl = "blogImgUrl";
+  static const apiProjectUrl = "projectUrl";
+  static const apiProfileUrl = "profileUrl";
+  static const apiId = "id";
+  static const apiUserId = "userId";
+  static const apiBlogId = "blogId";
+  static const apiUserName = "userName";
+  static const apiBloggerName = "bloggerName";
+  static const apiMessage = "message";
+  static const apiBio = "bio";
 
 }
+

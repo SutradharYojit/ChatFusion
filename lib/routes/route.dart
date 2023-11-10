@@ -29,7 +29,7 @@ GoRouter router = GoRouter(
     GoRoute(
       path: RoutesName.homeScreen,
       builder: (context, state) {
-        return const DashboardScreen();
+        return const HomeScreen();
       },
     ),
   ],

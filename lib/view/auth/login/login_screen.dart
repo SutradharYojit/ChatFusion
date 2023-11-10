@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../resources/resources.dart';
 import '../../../routes/routes_name.dart';
+import '../../../services/api_constants.dart';
 import '../../../services/services.dart';
+import '../../../services/status_code.dart';
 import '../../../widget/widget.dart';
 import '../signup/signup_screen.dart';
 
@@ -43,6 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Image.asset(
+                        IconAssets.appIcon,
+                        height: 100.h,
+                      ),
+                    ),
                     Text(
                       StringManager.appTitle,
                       style: TextStyle(
@@ -95,20 +104,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else {
                           loading(context);
 
-                          // await ApiServices().postApi(
-                          //   api: "${APIConstants.baseUrl}createUser/login",
-                          //   data: {
-                          //     "email": _emailController.text.trim(),
-                          //   },
-                          // ).then(
-                          //   (value) {
-                          //     log("Success");
-                          //     log(value["success"].toString());
-                          //     userPreferences.saveLoginUserInfo(_emailController.text.trim(),value["success"]);
-                          //     Navigator.pop(context);
-                          //     context.go(RoutesName.homeScreen);
-                          //   },
-                          // );
+                          ApiServices().postApi(
+                            api: "${APIConstants.baseUrl}register/login", // API endpoint URL.
+                            // pass the API arguments
+                            body: {
+                              ApiRequestBody.apiEmail: _emailController.text.trim(),
+                              ApiRequestBody.apiPassword: _passController.text.trim(),
+                            },
+                          ).then(
+                                (value) {
+                              if(value.statusCode==ServerStatusCodes.unAuthorised){
+                                Navigator.pop(context);// pop loading screen
+                                // toast snackBar message of invalid credentials
+                                WarningBar.snackMessage(context,
+                                    message: StringManager.invalidCredentialsTxt, color: ColorManager.redColor);
+                              }
+                              else{
+                                // store user token , and userId , logged in bool value
+                                userPreferences.saveLoginUserInfo(
+                                  value.data["token"],
+                                  value.data["success"],
+                                  value.data["userId"],
+                                );
+                                // Navigate to dashboard
+                                context.go(RoutesName.homeScreen);
+                              }
+                            },
+                          );
                         }
                       },
                     ),
