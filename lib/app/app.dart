@@ -19,9 +19,25 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            fontFamily: "PrimaryFonts",  // Set the primary font family
+            fontFamily: "PrimaryFonts", // Set the primary font family
             useMaterial3: true,
             scaffoldBackgroundColor: ColorManager.whiteColor,
+            appBarTheme: AppBarTheme(
+              titleSpacing: 10,
+              iconTheme: const IconThemeData(color: ColorManager.whiteColor),
+              color: ColorManager.gradientPurpleColor,
+              titleTextStyle: TextStyle(
+                color: ColorManager.whiteColor,
+                fontSize: 17.sp,
+              ),
+            ),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: ColorManager.gradientPurpleColor,
+
+            ),
+            dialogTheme: DialogTheme(
+              backgroundColor: ColorManager.whiteColor
+            )
           ),
           routerConfig: router, // Define the app's router configuration
         );

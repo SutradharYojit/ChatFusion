@@ -9,6 +9,9 @@ class AnimationAssets {
 
 class IconAssets {
   static const String appIcon = "$ICONS_PATH/chatfusion.png";
+  static const String chatIcon = "$ICONS_PATH/conversation.png";
+  static const String peopleIcon = "$ICONS_PATH/people.png";
+  static const String cameraIcon = "$ICONS_PATH/camera.png";
 
 }
 

@@ -24,10 +24,13 @@ class StringManager {
   static const haveAccountTxt = "Already have an account?";
   static const userExistTxt = "An account with this email already exists.";
 
-  // Dashboard Screen
-  static const portfolioScreen = "Portfolio";
-  static const blogScreen = "Blog";
-  static const contactUsScreen = "Contact Us";
+  // User listing Screen
+  static const peopleTxt = "Peoples";
+  static const peopleChatFusionTxt =  "Peoples on ChatFusion";
+  static const newGrpTxt =  "New Group";
+
+  // Create group Screen
+
 
 }
 // Firebase Service String Manager, the string defines the key(which store the data/value) of the database and defines the firebase collection String
@@ -41,16 +44,10 @@ class ApiRequestBody {
   static const apiTechnologies = "technologies";
   static const apiCategories = "categories";
   static const apiTags = "tags";
-  static const apiBlogImageUrl = "blogImgUrl";
-  static const apiProjectUrl = "projectUrl";
-  static const apiProfileUrl = "profileUrl";
   static const apiId = "id";
   static const apiUserId = "userId";
-  static const apiBlogId = "blogId";
   static const apiUserName = "userName";
-  static const apiBloggerName = "bloggerName";
   static const apiMessage = "message";
   static const apiBio = "bio";
-
 }
 

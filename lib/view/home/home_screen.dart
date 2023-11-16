@@ -1,5 +1,8 @@
+import 'package:chat_fusion_frontend/resources/resources.dart';
+import 'package:chat_fusion_frontend/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ChatFusion",
+          StringManager.myApp,
           style: TextStyle(
             fontSize: 25.sp,
             fontWeight: FontWeight.w400,
@@ -25,6 +28,13 @@ class HomeScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(RoutesName.usersScreen);
+
+        },
+        child: Image.asset(IconAssets.chatIcon,height: 20.h),
       ),
     );
   }

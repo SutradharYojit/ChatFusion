@@ -32,5 +32,23 @@ GoRouter router = GoRouter(
         return const HomeScreen();
       },
     ),
+    GoRoute(
+      path: RoutesName.usersScreen,
+      builder: (context, state) {
+        return const UserListingScreen();
+      },
+    ),
+    GoRoute(
+      path: RoutesName.addPeopleScreen,
+      builder: (context, state) {
+        return   AddPeopleScreen();
+      },
+    ),
+    GoRoute(
+      path: RoutesName.createGrpScreen,
+      builder: (context, state) {
+        return   CreateGroupScreen();
+      },
+    ),
   ],
 );

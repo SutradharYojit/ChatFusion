@@ -103,7 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           requiredAllFilled(context); // through scaffold snackbar
                         } else {
                           loading(context);
-
                           ApiServices().postApi(
                             api: "${APIConstants.baseUrl}register/login", // API endpoint URL.
                             // pass the API arguments
