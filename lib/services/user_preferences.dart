@@ -12,12 +12,7 @@ class UserPreferences {
 
   // Function of logout the user from the devices
   void logOutsetData(BuildContext context) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(child: LoadingBar());
-      },
-    );
+    loading(context);
     final SharedPreferences userData = await SharedPreferences.getInstance();
     userData.setString("token", "");
     userData.setBool("loggedIn", false);
@@ -37,10 +32,10 @@ class UserPreferences {
 
   // to store the user data locally
   Future saveLoginUserInfo(
-      String? token,
-      bool userLoggedIn,
-      String? userId,
-      ) async {
+    String? token,
+    bool userLoggedIn,
+    String? userId,
+  ) async {
     SharedPreferences userCredentials = await SharedPreferences.getInstance();
     userCredentials.setString("token", token ?? "");
     userCredentials.setBool("loggedIn", userLoggedIn);

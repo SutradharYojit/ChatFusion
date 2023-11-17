@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../services/services.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -19,6 +21,14 @@ class HomeScreen extends StatelessWidget {
             fontFamily: "DancingScript",
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              UserPreferences().logOutsetData(context);
+            },
+            icon: Icon(Icons.logout),
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -32,9 +42,8 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.push(RoutesName.usersScreen);
-
         },
-        child: Image.asset(IconAssets.chatIcon,height: 20.h),
+        child: Image.asset(IconAssets.chatIcon, height: 20.h),
       ),
     );
   }

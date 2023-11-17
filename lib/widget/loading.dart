@@ -1,3 +1,4 @@
+import 'package:chat_fusion_frontend/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -19,7 +20,7 @@ class LoadingBar extends StatelessWidget {
   Widget build(BuildContext context) {
     // A container with a teal background color and a circular loading animation
     return Container(
-      color: Colors.teal.withOpacity(0.7),
+      color: ColorManager.gradientPurpleColor.withOpacity(0.7),
       child: const CircularLoading(), // Display the circular loading animation
     );
   }

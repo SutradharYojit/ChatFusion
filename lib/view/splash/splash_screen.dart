@@ -21,9 +21,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   final userPreferences = UserPreferences();
 
   late final AnimationController _lottieCtrl = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 700));
-
-
+    vsync: this,
+    duration: const Duration(milliseconds: 700),
+  );
 
   late final Animation<Offset> lottiePosition = Tween<Offset>(
     begin: const Offset(10, 0),
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
     Future.delayed(
       duration,
-          () {
+      () {
         if (UserPreferences.loggedIn == true) {
           // If the user is logged in, navigate to the dashboard screen.
           log(UserPreferences.userId.toString());
@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SlideTransition(
-                  position:lottiePosition,
+                  position: lottiePosition,
                   child: Lottie.asset(AnimationAssets.splashAnimation, height: 170.h),
                 ),
                 SlideTransition(
