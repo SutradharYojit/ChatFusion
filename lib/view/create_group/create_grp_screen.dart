@@ -65,29 +65,46 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 children: [
                   Row(
                     children: [
-                      GestureDetector(
-                        onTap: () async{
-                          await picker
-                              .pickImage(
-                            source: ImageSource.gallery,
-                          )
-                              .then((image) async {
-                            if (image != null) {
-                              loading(context);
-                              setState(() {
-                                imageFile = File(image.path);
-                              });
-                              // final imageUrl = await uploadImage();
-                              // imgUrl.value = imageUrl;
-                              Navigator.pop(context);
-                            }
-                          });
+                      ValueListenableBuilder(
+                        valueListenable: imgUrl,
+                        builder: (context, value, child) {
+                          return value == ""
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    await picker
+                                        .pickImage(
+                                      source: ImageSource.gallery,
+                                    )
+                                        .then(
+                                      (image) async {
+                                        if (image != null) {
+                                          loading(context);
+                                          setState(() {
+                                            imageFile = File(image.path);
+                                          });
+                                          final imageUrl = await uploadImage();
+                                          imgUrl.value = imageUrl;
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                    );
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 30.w,
+                                    backgroundColor: ColorManager.gradientGreyColor,
+                                    child: Image.asset(IconAssets.cameraIcon, height: 25.h),
+                                  ),
+                                )
+                              : ClipOval(
+                                  child: SizedBox.fromSize(
+                                    size: Size.fromRadius(30.w),
+                                    child: CacheImage(
+                                      imgUrl: imgUrl.value,
+                                      errorWidget: Icon(Icons.abc),
+                                    ),
+                                  ),
+                                );
                         },
-                        child: CircleAvatar(
-                          radius: 30.w,
-                          backgroundColor: ColorManager.gradientGreyColor,
-                          child: Image.asset(IconAssets.cameraIcon, height: 25.h),
-                        ),
                       ),
                       Expanded(
                         child: Padding(
@@ -137,9 +154,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  if(selected.length==1){
+                                  if (selected.length == 1) {
                                     toastMessage(toastMessage: "1 member must be selected");
-                                  }else{
+                                  } else {
                                     ref.read(selectPeopleList.notifier).removeAt(index);
                                   }
                                 },
@@ -175,7 +192,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                   ],
                                 ),
                               ),
-                                Text(
+                              Text(
                                 selected[index],
                                 style: const TextStyle(
                                   color: ColorManager.greyColor,
@@ -221,9 +238,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 ),
               );
             },
-          ).timeout(duration,onTimeout: () {
-            context.go(RoutesName.homeScreen);
-          },);
+          ).timeout(
+            duration,
+            onTimeout: () {
+              context.go(RoutesName.homeScreen);
+            },
+          );
         },
         child: Icon(
           Icons.done_rounded,

@@ -5,3 +5,6 @@ export 'home/home_screen.dart';
 export 'user_listing/user_listing_screen.dart';
 export 'create_group/add_people_screen.dart';
 export 'create_group/create_grp_screen.dart';
+export 'chat/chat_screen.dart';
+export 'user_profile/user_profile_screen.dart';
+export 'user_profile/edit_user_profile.dart';

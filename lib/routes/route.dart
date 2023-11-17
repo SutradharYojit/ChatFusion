@@ -29,11 +29,11 @@ GoRouter router = GoRouter(
     GoRoute(
       path: RoutesName.homeScreen,
       builder: (context, state) {
-        return const HomeScreen();
+        return HomeScreen();
       },
     ),
     GoRoute(
-      path: RoutesName.usersScreen,
+      path: RoutesName.usersListingScreen,
       builder: (context, state) {
         return const UserListingScreen();
       },
@@ -41,13 +41,25 @@ GoRouter router = GoRouter(
     GoRoute(
       path: RoutesName.addPeopleScreen,
       builder: (context, state) {
-        return   AddPeopleScreen();
+        return AddPeopleScreen();
       },
     ),
     GoRoute(
       path: RoutesName.createGrpScreen,
       builder: (context, state) {
-        return   CreateGroupScreen();
+        return CreateGroupScreen();
+      },
+    ),
+    GoRoute(
+      path: RoutesName.userProfileScreen,
+      builder: (context, state) {
+        return UserProfileScreen();
+      },
+    ),
+    GoRoute(
+      path: RoutesName.editProfileScreen,
+      builder: (context, state) {
+        return EditUserProfile();
       },
     ),
   ],
