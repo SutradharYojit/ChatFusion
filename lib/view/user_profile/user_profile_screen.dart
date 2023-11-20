@@ -1,11 +1,7 @@
-import 'dart:developer';
-
-import 'package:chat_fusion_frontend/resources/color_manager.dart';
 import 'package:chat_fusion_frontend/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../resources/resources.dart';
 import '../../widget/widget.dart';
 

@@ -62,5 +62,11 @@ GoRouter router = GoRouter(
         return EditUserProfile();
       },
     ),
+    GoRoute(
+      path: RoutesName.chatScreen,
+      builder: (context, state) {
+        return ChatScreen();
+      },
+    ),
   ],
 );

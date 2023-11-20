@@ -15,6 +15,11 @@ class IconAssets {
 
 }
 
+class ImageAssets {
+  static const String backgroundImg = "$IMAGES_PATH/background_img.png";
+  static const String blankProfileImg = "$IMAGES_PATH/noprofile.png";
+}
+
 class NetworkImg {
   static const String demo1 = "https://c4.wallpaperflare.com/wallpaper/108/140/869/digital-digital-art-artwork-fantasy-art-drawing-hd-wallpaper-preview.jpg";
   static const String demo2 = "https://c4.wallpaperflare.com/wallpaper/708/846/337/anime-demon-slayer-kimetsu-no-yaiba-tanjirou-kamado-hd-wallpaper-preview.jpg";
