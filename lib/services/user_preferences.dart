@@ -19,6 +19,9 @@ class UserPreferences {
     userData.setString("userId", "");
     // ignore: use_build_context_synchronously
     context.go(RoutesName.loginScreen);
+    debugPrint("O token: ${token.toString()}");
+    debugPrint("O userId: ${userId.toString()}");
+    debugPrint("O loggedIn: ${loggedIn.toString()}");
   }
 
   // to get the user data which is stores locally
@@ -28,6 +31,8 @@ class UserPreferences {
     loggedIn = userData.getBool("loggedIn");
     userId = userData.getString("userId");
     debugPrint("token: ${token!}");
+    debugPrint("userId: ${userId!}");
+    debugPrint("loggedIn: ${loggedIn!}");
   }
 
   // to store the user data locally

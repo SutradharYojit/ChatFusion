@@ -9,3 +9,4 @@ export 'custom_model_sheet.dart';
 export 'tost_message.dart';
 export 'cache_network_img.dart';
 export 'chat_box.dart';
+export 'up_animation.dart';

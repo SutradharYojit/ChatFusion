@@ -1,3 +1,4 @@
+import 'package:chat_fusion_frontend/model/model.dart';
 import 'package:go_router/go_router.dart';
 import '../view/view.dart';
 import 'routes_name.dart';
@@ -29,7 +30,7 @@ GoRouter router = GoRouter(
     GoRoute(
       path: RoutesName.homeScreen,
       builder: (context, state) {
-        return HomeScreen();
+        return const HomeScreen();
       },
     ),
     GoRoute(
@@ -65,7 +66,9 @@ GoRouter router = GoRouter(
     GoRoute(
       path: RoutesName.chatScreen,
       builder: (context, state) {
-        return ChatScreen();
+        return ChatScreen(
+          user: state.extra as UsersModel,
+        );
       },
     ),
   ],

@@ -14,7 +14,7 @@ class ApiServices {
           }));
       log(response.statusCode.toString());
       if (response.statusCode == ServerStatusCodes.success) {
-        // log(response.data.toString());
+        log(response.data.toString());
         var jsonData = response.data;
         return jsonData;
       }
@@ -35,6 +35,8 @@ class ApiServices {
         },
       ),
     );
+    log(response_1.data.toString());
+
     return ApiResponse(data: response_1.data, statusCode: response_1.statusCode);
   }
 // DELETE APi , Function to Delete Blog Data from the Database

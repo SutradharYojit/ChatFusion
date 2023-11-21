@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../resources/resources.dart';
@@ -120,6 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                               else{
                                 // store user token , and userId , logged in bool value
+                                log(value.data["token"].toString());
+                                log(value.data["success"].toString());
+                                log(value.data["userId"].toString());
                                 userPreferences.saveLoginUserInfo(
                                   value.data["token"],
                                   value.data["success"],

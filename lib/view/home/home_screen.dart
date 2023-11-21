@@ -10,37 +10,13 @@ import '../../widget/widget.dart';
 import 'user_listing_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final List<String> dummyUser = [
-    'Jimmy Suthar',
-    'Emily Johnson',
-    'Michael Davis',
-    'Sarah Miller',
-    'Christopher Brown',
-    'Jessica Wilson',
-    'Brian Taylor',
-    'Olivia Anderson',
-    'David Martinez',
-    'Lauren Thomas',
-    'Daniel Jackson',
-    'Ava White',
-    'Matthew Harris',
-    'Emma Turner',
-    'Andrew Clark',
-  ];
-
-  final List<String> dummyImg = [
-    NetworkImg.demo1,
-    NetworkImg.demo2,
-    NetworkImg.demo3,
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -98,24 +74,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             return const Divider();
                           },
                           padding: EdgeInsets.only(top: 10.r, bottom: 50.r),
-                          itemCount: users.length-1,
+                          itemCount: users.length - 1,
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () {
                                 log("move to chat screen");
-                                context.push(RoutesName.chatScreen);
+                                context.push(RoutesName.chatScreen, extra: users[index + 1]);
                               },
                               leading: ClipOval(
                                 child: SizedBox.fromSize(
                                   size: Size.fromRadius(23.w),
                                   child: CacheImage(
-                                    imgUrl: users[index+1].profileUrl.toString(),
+                                    imgUrl: users[index + 1].profileUrl.toString(),
                                     errorWidget: Image.asset(ImageAssets.blankProfileImg),
                                   ),
                                 ),
                               ),
                               title: Text(
-                                users[index+1].userName.toString(),
+                                users[index + 1].userName.toString(),
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
