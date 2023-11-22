@@ -55,7 +55,9 @@ class UserListingScreen extends StatelessWidget {
                 ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 5.h,);
+                    return SizedBox(
+                      height: 5.h,
+                    );
                   },
                   itemCount: 20,
                   shrinkWrap: true,

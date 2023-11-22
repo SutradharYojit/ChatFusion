@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 import '../../resources/resources.dart';
 import '../../routes/routes_name.dart';
 import '../../services/services.dart';
+
+import '../../services/socket_service.dart';
+
+
 
 // Splash Screen
 class SplashScreen extends StatefulWidget {
@@ -39,9 +44,23 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     CurvedAnimation(parent: _lottieCtrl, curve: Curves.easeOutQuint),
   );
 
+  _connectState() {
+    SocketIo.socket.onConnect((_) {
+      log('connect');
+    });
+    SocketIo.socket.on('chatRoom', (data) {
+      print("message: ");
+      print(data);
+    });
+    SocketIo.socket.on('event', (data) => log(data));
+    SocketIo.socket.onDisconnect((_) => log('disconnect'));
+    SocketIo.socket.on('fromServer', (_) => log(_));
+  }
+
   @override
   void initState() {
     super.initState();
+    _connectState();
     userPreferences.getUserInfo();
     _lottieCtrl.forward();
     navigation();

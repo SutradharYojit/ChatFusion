@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../model/model.dart';
 import '../../resources/resources.dart';
 import '../../services/api_constants.dart';
+import '../../services/socket_service.dart';
 import '../../services/status_code.dart';
 import '../../widget/widget.dart';
 import 'chat_listing_provider.dart';
@@ -276,7 +277,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with SingleTickerProvid
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(15),
                                   onTap: () {
-                                    ApiServices().postApi(
+                                    ref.read(chatList.notifier).sendChats(
+                                          receiverId: userData.id!,
+                                          message: _chatTextCtrl.text.trim(),
+                                        );
+                                    /*ApiServices().postApi(
                                       api: "${APIConstants.baseUrl}message/send", // API endpoint URL.
                                       // pass the API arguments
                                       body: {
@@ -293,7 +298,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with SingleTickerProvid
                                           toastMessage(toastMessage: "Error");
                                         }
                                       },
-                                    );
+                                    );*/
                                     _chatTextCtrl.clear();
                                   },
                                   child: CircleAvatar(
